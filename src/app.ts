@@ -14,6 +14,8 @@ app.post("/recomendations", recomendationsController.addRecomendation)
 
 app.post("/recomendations:id/upvote",recomendationsController.upVote)
 
+app.post("/recomendations:id/downvote",recomendationsController.downVote)
+
     
 
 export default app;

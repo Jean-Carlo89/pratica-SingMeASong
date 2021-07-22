@@ -33,4 +33,17 @@ export async function upVote(req:Request,res:Response){
         res.sendStatus(500)
     }
 }
+
+export async function downVote(req:Request,res:Response){
+    //console.log(req.params)
+    try{
+        await recomendationsRepositories.updateScore(Number(req.params.id),'-')
+
+        res.sendStatus(200)
+    }catch(e){
+        console.log(e)
+        res.sendStatus(500)
+    }
+}
+   
    
