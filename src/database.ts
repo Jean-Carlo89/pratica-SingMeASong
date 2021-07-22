@@ -6,22 +6,13 @@ const databaseConfig={
     user:'postgres',
     password:'123456',
     port:5432,
-    database:''
+    database:process.env.NODE_ENV==='test' ? "sing_me_a_song_test" : "sing_me_a_song"
 }
 
-const connection = 
+const connection = new Pool(databaseConfig)
 
 
-CREATE TABLE "recomendations" (
-	"id" serial NOT NULL,
-	"name" TEXT NOT NULL,
-	"youtubeLink" TEXT NOT NULL,
-	"score" integer NOT NULL,
-	CONSTRAINT "Songs_pk" PRIMARY KEY ("id")
-) WITH (
-  OIDS=FALSE
-);
 
-
+export default connection
 
 
