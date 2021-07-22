@@ -12,6 +12,8 @@ app.get("/test", (req, res) => {
 
 app.post("/recomendations", recomendationsController.addRecomendation)
 
+app.post("/recomendations:id/upvote",recomendationsController.upVote)
+
     
 
 export default app;

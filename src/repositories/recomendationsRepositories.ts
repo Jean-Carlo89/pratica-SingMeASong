@@ -8,5 +8,18 @@ export async function saveNewRecomendation(body:{name:string,youtubeLink:string}
 
    
     
-    }
+}
+
+export async function updateScore(number:number,type:string) {
+    console.log(number)
+    console.log(type)
+    console.log(typeof(type))
+    
+    await connection.query(`
+        UPDATE recomendations
+        SET score = score ($2) 1 
+        WHERE id=($2)
+        `,[type,number])
+
+ }
     
