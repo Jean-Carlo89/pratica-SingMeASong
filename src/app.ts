@@ -12,4 +12,6 @@ app.get("/test", (req, res) => {
 
 app.post("/recomendations", recomendationsController.addRecomendation)
 
+    
+
 export default app;
