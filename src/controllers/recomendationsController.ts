@@ -23,8 +23,7 @@ export async function addRecomendation(req:Request,res:Response){
 }
 
 export async function Vote(req:Request,res:Response){
-    //console.log(req.params)
-    console.log(req.path)
+    
     let operator;
     if(req.path.includes('upvote')){
         operator='+'
@@ -70,13 +69,14 @@ export async function getRandom(req:Request,res:Response){
 }
 
 export async function getTop(req:Request,res:Response){
-    console.log(req.params)
-
+   
     const {amount} = req.params
 
     try{
         const searchTop = await recomendationsRepositories.getTop(Number(amount))
-        return
+
+        res.status(200).send(searchTop)
+        
     }catch(e){
         console.log(e)
         res.sendStatus(500)

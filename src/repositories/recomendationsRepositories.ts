@@ -8,16 +8,10 @@ export async function saveNewRecomendation(body:{name:string,youtubeLink:string}
     
       await connection.query(`INSERT INTO recomendations (name,"youtubeLink",score) VALUES ($1,$2,0)`,[name,youtubeLink])
 
-   
-    
 }
 
 export async function updateScore(id:number,type:string) {
-    console.log(id)
-    console.log(type)
-    console.log(typeof(type))
-
-    //check if id exist
+   
        const checkIfIdExist = await connection.query(`
         SELECT * FROM recomendations
         WHERE id = ($1)
@@ -37,7 +31,7 @@ export async function updateScore(id:number,type:string) {
             `,
             [id])
 
-           // console.log(result)
+          
 
             if(result.rows[0].score < -5){
                 await connection.query(`DELETE FROM recomendations WHERE id = ($1)`,[id])
@@ -53,7 +47,7 @@ export async function updateScore(id:number,type:string) {
             `,
             [id])
 
-            //console.log(result)
+           
 
             if(result.rows[0].score < -5){
                 await connection.query(`DELETE FROM recomendations WHERE id = ($1)`,[id])
@@ -70,7 +64,6 @@ export async function updateScore(id:number,type:string) {
  }
 
  export async function getRandom(){
-     //const random = Math.random()
      
      const check = await connection.query(`SELECT * FROM recomendations`)
 
@@ -79,7 +72,7 @@ export async function updateScore(id:number,type:string) {
      }
      
      const random = 0.4
-     console.log(random)
+    
      
      if(random>=0.7){
         let result = await connection.query(`
@@ -109,7 +102,7 @@ export async function updateScore(id:number,type:string) {
         WHERE score < 10`
         )
 
-        console.log(result.rows)
+        
         
         if(result.rows.length>0){
             const  randomArray  = recomendationsServices.randomizeArray(result.rows)
@@ -136,5 +129,7 @@ export async function updateScore(id:number,type:string) {
         `)
 
       const result = recomendationsServices.getAmountNumbersOfRecomendations(recomendations.rows,amount)
+
+      return result
  }
     

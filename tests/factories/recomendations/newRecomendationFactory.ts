@@ -18,3 +18,10 @@ export async function getId(recomendation:{name:string,youtubeLink:string}){
     
     return search.rows[0].id
 }
+
+export async function insertNewRecomendation(recomendation:{name:string,youtubeLink:string}) {
+    for(let i =0;i<3;i++){
+        await connection.query(`INSERT INTO recomendations (name,"youtubeLink",score) VALUES($1,$2,0)`,[recomendation.name,recomendation.youtubeLink])
+    }
+
+}

@@ -3,7 +3,7 @@ import getYouTubeID from 'get-youtube-id';
 
 export function validateRecomendation(body:{name:string, youtubeLink:string}){
    
-    console.log('passou aqui')
+    
     if(getYouTubeID(body.youtubeLink) && body.name.length>0) {
         return true
     }else{
@@ -24,9 +24,11 @@ export function randomizeArray(array:any[]){
     return array.sort(()=>Math.random()-0.5)
 }
 
-export function getAmountNumbersOfRecomendations(array:any[],amount:Number){
-    console.log(array)
-    console.log(amount)
-    return
+export function getAmountNumbersOfRecomendations(array:any[],amount:number){
+    array.sort((a,b)=> b.score-a.score)
+    
+    array.splice(amount)
+    
+    return array
 }
 

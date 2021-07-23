@@ -14,7 +14,7 @@ describe("POST/recomendations",()=>{
     it("returns 200 if succesful insert of new recomendation",async ()=>{
        const recomendation = createNewRecomendation()
 
-      // console.log(recomendation.name)
+      
 
         const result = await agent.post("/recomendations").send(recomendation)
 
@@ -52,7 +52,7 @@ describe("POST/recomendation:id/downvote",()=>{
         const recomendation = createNewRecomendation()
 
        const id = await getId(recomendation)
-       // console.log(id)
+       
         const result = await agent.post(`/recomendations${id}/downvote`)
 
          expect(result.status).toEqual(200)
