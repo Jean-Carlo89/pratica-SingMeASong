@@ -69,7 +69,48 @@ export async function updateScore(id:number,type:string) {
  }
 
  export async function getRandom(){
-     const random = Math.random()
+     //const random = Math.random()
+     const random = 0.8
      console.log(random)
+     
+     if(random>=0.7){
+        let result = await connection.query(`
+         SELECT * FROM recomendations
+         WHERE score >= 10`
+         )
+
+         //console.log(result.rows)
+
+         if(result.rows.length>0){
+            //const aleatorio = recomendationsServices.randomizeArray(result.rows)
+           const  randomArray  = result.rows.sort(()=>Math.random()-0.5)
+          // console.log(randomArray)
+          return randomArray[0]
+         }else{
+            result = await connection.query(`
+                SELECT * FROM recomendations
+                `
+                )
+
+                const  randomArray  = result.rows.sort(()=>Math.random()-0.5)
+
+                return randomArray[0]
+         }
+         
+     }else{
+        const result = await connection.query(`
+        SELECT * FROM recomendations
+        WHERE score < 10`
+        )
+
+        console.log(result.rows)
+        
+        if(result.rows.length>0){
+            return
+         }else{
+             return false
+         }
+         
+     }
  }
     
