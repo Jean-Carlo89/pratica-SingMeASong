@@ -69,3 +69,18 @@ export async function getRandom(req:Request,res:Response){
 
 }
 
+export async function getTop(req:Request,res:Response){
+    console.log(req.params)
+
+    const {amount} = req.params
+
+    try{
+        const searchTop = await recomendationsRepositories.getTop(Number(amount))
+        return
+    }catch(e){
+        console.log(e)
+        res.sendStatus(500)
+    }
+    
+}
+

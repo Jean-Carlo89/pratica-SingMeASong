@@ -128,4 +128,13 @@ export async function updateScore(id:number,type:string) {
          
      }
  }
+
+
+ export async function getTop(amount:number){
+     const recomendations = await connection.query(`
+        SELECT * FROM recomendations
+        `)
+
+      const result = recomendationsServices.getAmountNumbersOfRecomendations(recomendations.rows,amount)
+ }
     
