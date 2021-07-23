@@ -16,7 +16,7 @@ export async function updateScore(id:number,type:string) {
     console.log(type)
     console.log(typeof(type))
     
-   
+    
     
     if(type==='+'){
          const result=await connection.query(`
@@ -50,6 +50,7 @@ export async function updateScore(id:number,type:string) {
             }
     }
 
+    
 
     
 
