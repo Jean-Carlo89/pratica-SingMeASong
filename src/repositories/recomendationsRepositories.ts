@@ -1,6 +1,6 @@
-import { resourceLimits } from 'worker_threads'
-import connection from '../database'
 
+import connection from '../database'
+import * as recomendationsServices from '../services/recomendationsServices'
 export async function saveNewRecomendation(body:{name:string,youtubeLink:string}){
 
     const{name,youtubeLink} = body
@@ -66,5 +66,10 @@ export async function updateScore(id:number,type:string) {
     
     
 
+ }
+
+ export async function getRandom(){
+     const random = Math.random()
+     console.log(random)
  }
     

@@ -1,5 +1,6 @@
 import {createRecomendationSchema} from '../schemas/newRecomendationSchema'
 import getYouTubeID from 'get-youtube-id'; 
+
 export function validateRecomendation(body:{name:string, youtubeLink:string}){
    
     console.log('passou aqui')
@@ -18,3 +19,7 @@ export function validateRecomendation(body:{name:string, youtubeLink:string}){
     
 
 }
+
+// export function randomize(){
+//     math
+// }

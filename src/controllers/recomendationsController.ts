@@ -1,4 +1,4 @@
-import {Request,Response} from "express"
+import {Request,response,Response} from "express"
 
 import {validateRecomendation} from '../services/recomendationsServices'
 
@@ -47,5 +47,16 @@ export async function Vote(req:Request,res:Response){
         console.log(e)
         res.sendStatus(500)
     }
+}
+
+export async function getRandom(req:Request,res:Response){
+
+    try{
+        const response = await recomendationsRepositories.getRandom()
+    }catch(e){
+        res.sendStatus(500)
+        console.log(e)
+    }
+
 }
 
