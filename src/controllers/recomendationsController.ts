@@ -22,10 +22,25 @@ export async function addRecomendation(req:Request,res:Response){
    
 }
 
-export async function upVote(req:Request,res:Response){
+export async function Vote(req:Request,res:Response){
     //console.log(req.params)
+    console.log(req.path)
+    let operator;
+    if(req.path.includes('upvote')){
+        operator='+'
+    }
+
+    if(req.path.includes('downvote')){
+        operator='-'
+    }
+    
     try{
-        await recomendationsRepositories.updateScore(Number(req.params.id),'+')
+        const insertResult = await recomendationsRepositories.updateScore(Number(req.params.id),operator)
+
+        if(!insertResult){
+            return res.status(400).send('Esta recomendção não existe')
+           
+        }
 
         res.sendStatus(200)
     }catch(e){
@@ -34,16 +49,3 @@ export async function upVote(req:Request,res:Response){
     }
 }
 
-export async function downVote(req:Request,res:Response){
-    //console.log(req.params)
-    try{
-        await recomendationsRepositories.updateScore(Number(req.params.id),'-')
-
-        res.sendStatus(200)
-    }catch(e){
-        console.log(e)
-        res.sendStatus(500)
-    }
-}
-   
-   

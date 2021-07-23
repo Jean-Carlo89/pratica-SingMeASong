@@ -15,7 +15,16 @@ export async function updateScore(id:number,type:string) {
     console.log(id)
     console.log(type)
     console.log(typeof(type))
-    
+
+    //check if id exist
+       const checkIfIdExist = await connection.query(`
+        SELECT * FROM recomendations
+        WHERE id = ($1)
+        `,[id])
+        
+        if(!checkIfIdExist.rows[0]){
+            return false
+        }
     
     
     if(type==='+'){
@@ -53,7 +62,7 @@ export async function updateScore(id:number,type:string) {
     
 
     
-
+    return true
     
     
 

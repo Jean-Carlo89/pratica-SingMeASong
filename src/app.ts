@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-
+import {Request,Response} from "express"
 import * as recomendationsController from './controllers/recomendationsController'
 const app = express();
 app.use(cors());
@@ -12,9 +12,9 @@ app.get("/test", (req, res) => {
 
 app.post("/recomendations", recomendationsController.addRecomendation)
 
-app.post("/recomendations:id/upvote",recomendationsController.upVote)
+app.post("/recomendations:id/upvote",recomendationsController.Vote)
 
-app.post("/recomendations:id/downvote",recomendationsController.downVote)
+app.post("/recomendations:id/downvote",recomendationsController.Vote)
 
     
 
