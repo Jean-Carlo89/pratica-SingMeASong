@@ -56,13 +56,15 @@ export async function getRandom(req:Request,res:Response){
 
         if(response==404){
             res.sendStatus(404)
+            return
         }
         
         
         res.status(200).send(response)
     }catch(e){
-        res.sendStatus(500)
         console.log(e)
+        res.sendStatus(500)
+        
     }
 
 }

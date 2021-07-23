@@ -4,6 +4,7 @@ import connection from '../../../src/database'
 import faker from 'faker'
 
 import {createNewRecomendation,getId} from '../../factories/recomendations/newRecomendationFactory'
+
 beforeEach(async()=>{
     await connection.query(`DELETE FROM recomendations`)
 })
