@@ -71,7 +71,7 @@ export async function updateScore(id:number,type:string) {
          return 404
      }
      
-     const random = 0.4
+     const random = Math.random()
     
      
      if(random>=0.7){
