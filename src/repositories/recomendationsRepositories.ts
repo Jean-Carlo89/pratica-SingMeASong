@@ -70,7 +70,7 @@ export async function updateScore(id:number,type:string) {
 
  export async function getRandom(){
      //const random = Math.random()
-     const random = 0.8
+     const random = 0.4
      console.log(random)
      
      if(random>=0.7){
@@ -79,12 +79,10 @@ export async function updateScore(id:number,type:string) {
          WHERE score >= 10`
          )
 
-         //console.log(result.rows)
-
          if(result.rows.length>0){
-            //const aleatorio = recomendationsServices.randomizeArray(result.rows)
-           const  randomArray  = result.rows.sort(()=>Math.random()-0.5)
-          // console.log(randomArray)
+            
+           const  randomArray  = recomendationsServices.randomizeArray(result.rows)
+          
           return randomArray[0]
          }else{
             result = await connection.query(`
@@ -92,13 +90,13 @@ export async function updateScore(id:number,type:string) {
                 `
                 )
 
-                const  randomArray  = result.rows.sort(()=>Math.random()-0.5)
+                const  randomArray  = recomendationsServices.randomizeArray(result.rows)
 
                 return randomArray[0]
          }
          
      }else{
-        const result = await connection.query(`
+        let result = await connection.query(`
         SELECT * FROM recomendations
         WHERE score < 10`
         )
@@ -106,9 +104,18 @@ export async function updateScore(id:number,type:string) {
         console.log(result.rows)
         
         if(result.rows.length>0){
-            return
+            const  randomArray  = recomendationsServices.randomizeArray(result.rows)
+          
+          return randomArray[0]
          }else{
-             return false
+            result = await connection.query(`
+            SELECT * FROM recomendations
+            `
+            )
+
+            const  randomArray  = recomendationsServices.randomizeArray(result.rows)
+
+            return randomArray[0]
          }
          
      }

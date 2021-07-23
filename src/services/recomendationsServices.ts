@@ -20,6 +20,6 @@ export function validateRecomendation(body:{name:string, youtubeLink:string}){
 
 }
 
-// export function randomizeArray(array:any[]){
-    
-// }
+export function randomizeArray(array:any[]){
+    return array.sort(()=>Math.random()-0.5)
+}
