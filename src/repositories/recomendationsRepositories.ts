@@ -1,4 +1,5 @@
 
+import { isGeneratorFunction } from 'util/types'
 import connection from '../database'
 import * as recomendationsServices from '../services/recomendationsServices'
 export async function saveNewRecomendation(body:{name:string,youtubeLink:string}){
@@ -70,6 +71,13 @@ export async function updateScore(id:number,type:string) {
 
  export async function getRandom(){
      //const random = Math.random()
+     
+     const check = await connection.query(`SELECT * FROM recomendations`)
+
+     if(check.rows.length===0){
+         return 404
+     }
+     
      const random = 0.4
      console.log(random)
      

@@ -53,6 +53,10 @@ export async function getRandom(req:Request,res:Response){
 
     try{
         const response = await recomendationsRepositories.getRandom()
+
+        if(response==404){
+            res.sendStatus(404)
+        }
         
         
         res.status(200).send(response)
