@@ -2,11 +2,11 @@
 import { isGeneratorFunction } from 'util/types'
 import connection from '../database'
 import * as recomendationsServices from '../services/recomendationsServices'
+import {RecomendationBody} from '../controllers/recomendationsController'
 
+export async function saveNewRecomendation(recomendation:RecomendationBody){
 
-export async function saveNewRecomendation(body:{name:string,youtubeLink:string}){
-
-    const{name,youtubeLink} = body
+    const{name,youtubeLink} = recomendation
     
       await connection.query(`INSERT INTO recomendations (name,"youtubeLink",score) VALUES ($1,$2,0)`,[name,youtubeLink])
 
