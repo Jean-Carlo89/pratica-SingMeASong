@@ -1,10 +1,11 @@
 import {createRecomendationSchema} from '../schemas/newRecomendationSchema'
 import getYouTubeID from 'get-youtube-id'; 
+import {RecomendationBody} from '../controllers/recomendationsController'
 
-export function validateRecomendation(body:{name:string, youtubeLink:string}){
+export function validateRecomendation(recomendation:RecomendationBody){
    
     
-    if(getYouTubeID(body.youtubeLink) && body.name.length>0) {
+    if(getYouTubeID(recomendation.youtubeLink) && recomendation.name.length>0) {
         return true
     }else{
         return false

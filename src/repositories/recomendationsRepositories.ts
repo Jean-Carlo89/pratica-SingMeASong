@@ -2,6 +2,8 @@
 import { isGeneratorFunction } from 'util/types'
 import connection from '../database'
 import * as recomendationsServices from '../services/recomendationsServices'
+
+
 export async function saveNewRecomendation(body:{name:string,youtubeLink:string}){
 
     const{name,youtubeLink} = body
@@ -22,39 +24,59 @@ export async function updateScore(id:number,type:string) {
         }
     
     
-    if(type==='+'){
-         const result=await connection.query(`
-            UPDATE recomendations
-            SET score = score + 1 
-            WHERE id=($1)
-            RETURNING score
-            `,
-            [id])
+    // if(type==='+'){
+    //      const result=await connection.query(`
+    //         UPDATE recomendations
+    //         SET score = score + 1 
+    //         WHERE id=($1)
+    //         RETURNING score
+    //         `,
+    //         [id])
+
+          
+
+    //         if(result.rows[0].score < -5){
+    //             await connection.query(`DELETE FROM recomendations WHERE id = ($1)`,[id])
+    //         }
+
+            
+    // }else{
+    //     const result=await connection.query(`
+    //         UPDATE recomendations
+    //         SET score = score - 1 
+    //         WHERE id=($1)
+    //         RETURNING score
+    //         `,
+    //         [id])
+
+           
+
+    //         if(result.rows[0].score < -5){
+    //             await connection.query(`DELETE FROM recomendations WHERE id = ($1)`,[id])
+    //         }
+    // }
+
+    
+        let signal;
+    if(type==="+"){
+        signal = 1
+    }else{
+        signal= -1
+    }
+
+    const result=await connection.query(`
+             UPDATE recomendations
+             SET score = score + ($2) 
+             WHERE id=($1)
+             RETURNING score
+             `,
+            [id,signal])
 
           
 
             if(result.rows[0].score < -5){
                 await connection.query(`DELETE FROM recomendations WHERE id = ($1)`,[id])
             }
-
-            
-    }else{
-        const result=await connection.query(`
-            UPDATE recomendations
-            SET score = score - 1 
-            WHERE id=($1)
-            RETURNING score
-            `,
-            [id])
-
-           
-
-            if(result.rows[0].score < -5){
-                await connection.query(`DELETE FROM recomendations WHERE id = ($1)`,[id])
-            }
-    }
-
-    
 
     
     return true

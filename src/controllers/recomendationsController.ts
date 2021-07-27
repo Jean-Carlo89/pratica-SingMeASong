@@ -4,14 +4,22 @@ import {validateRecomendation} from '../services/recomendationsServices'
 
 import * as recomendationsRepositories from '../repositories/recomendationsRepositories'
 
-export async function addRecomendation(req:Request,res:Response){
-   try{
+export interface RecomendationBody{
+    name:string;
+    youtubeLink:string;
+}
 
-        if(!validateRecomendation(req.body)){
+
+export async function addRecomendation(req:Request,res:Response){
+   const recomendation :RecomendationBody = req.body
+
+    try{
+
+        if(!validateRecomendation(recomendation)){
             return res.status(400).send('Não Verificou')
         }
        
-        await recomendationsRepositories.saveNewRecomendation(req.body)
+        await recomendationsRepositories.saveNewRecomendation(recomendation)
         
        res.sendStatus(200)
         
